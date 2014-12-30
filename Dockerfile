@@ -5,7 +5,8 @@ MAINTAINER geoffrey.bachelet@gmail.com
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update -y
-RUN apt-get install -y vim curl nginx php5-fpm php5-mysql mysql-server daemontools
+RUN apt-get install -y vim curl nginx php5-fpm php5-mysql mysql-server daemontools && \
+    apt-get clean
 
 RUN mkdir /var/www
 RUN curl -sL http://wordpress.org/latest.tar.gz | tar xzC /var/www

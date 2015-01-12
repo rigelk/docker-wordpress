@@ -1,10 +1,10 @@
-docker-wordpress
-================
+Press Gang
+==========
 
-Simple Dockerfile to run [Wordpress](http://wordpress.com/) inside a [Docker](http://docker.io) container.
+A dev wordpress image, to run [Wordpress](https://wordpress.org/download/) inside a self-sufficient [Docker](https://www.docker.com) container. Ships with nginx, php, latest wordpress and a mysql base.
 
-Usage
------
+Getting it
+----------
 
 Build the image:
 
@@ -14,7 +14,20 @@ Or just pull the trusted build:
 
     docker pull ubermuda/docker-wordpress
 
-You might want to have the database and `wp-content` in shared volumes. To do so, you need to create a data container that will only hold data. You just have to run a container with the `-v` option to create volumes:
+Usage
+-----
+
+Running it alone uses the inner mysql database and creates a new wordpress instance :
+
+    docker run -d -P ubermuda/docker-wordpress
+
+You might want to have the database and `wp-content` in shared volumes. I myself like to run the following for convenience and super-easy dev :
+
+    docker run -d -p 80:80 --name wordpress -v $(pwd)/wordpress/wp-content/:/var/www/wordpress/wp-content ubermuda/docker-wordpress
+
+---
+
+To have a more reliable solution, you need to create a data container that will only hold data. You just have to run a container with the `-v` option to create volumes:
 
     docker run \
         --name wordpress-data \
